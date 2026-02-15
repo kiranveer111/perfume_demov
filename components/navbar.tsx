@@ -55,7 +55,7 @@ export function Navbar() {
                         </div>
                     ) : (
                         <Link href="/login" data-testid="nav-login">
-                            <Button variant="primary" size="sm">
+                            <Button variant="default" size="sm">
                                 <User className="mr-2 h-4 w-4" />
                                 Login
                             </Button>
