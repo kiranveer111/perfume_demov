@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useCart } from "@/components/cart-provider"
+import { useCart } from "@/context/CartContext"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 
 export default function CheckoutPage() {
     const router = useRouter()
-    const { cart, total, clearCart } = useCart()
+    const { items: cart, cartTotal: total, clearCart } = useCart()
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
