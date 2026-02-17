@@ -28,33 +28,28 @@ function getRandomPrice(min: number, max: number): number {
 async function main() {
     console.log('Start seeding ...')
 
-    // Clear existing data
-    await prisma.orderItem.deleteMany()
-    await prisma.order.deleteMany()
-    await prisma.product.deleteMany()
-    await prisma.category.deleteMany()
-    await prisma.user.deleteMany()
-
-    // Create Specific Categories matching lib/data.ts
+    // Upsert categories (never delete users/orders - safe for production)
     const categoryData = [
-        { name: "Men's Perfumes", slug: "mens" },
-        { name: "Women's Perfumes", slug: "womens" },
-        { name: "Unisex Perfumes", slug: "unisex" },
-        { name: "Luxury Collection", slug: "luxury" },
-        { name: "Gift Sets", slug: "gifts" },
-        { name: "Oud Collection", slug: "oud" },
+        { name: "Men's Perfumes" },
+        { name: "Women's Perfumes" },
+        { name: "Unisex Perfumes" },
+        { name: "Luxury Collection" },
+        { name: "Gift Sets" },
+        { name: "Oud Collection" },
     ]
 
-    const categoryMap = new Map();
+    const categoryMap = new Map<string, string>()
 
     for (const cat of categoryData) {
-        const created = await prisma.category.create({
-            data: { name: cat.name }
+        const c = await prisma.category.upsert({
+            where: { name: cat.name },
+            create: { name: cat.name },
+            update: {}
         })
-        categoryMap.set(cat.name, created.id)
+        categoryMap.set(c.name, c.id)
     }
 
-    console.log(`Created ${categoryData.length} categories.`)
+    console.log(`Upserted ${categoryData.length} categories.`)
 
     // Create Specific Products matching lib/data.ts with FIXED IDs
     const products = [
@@ -141,19 +136,29 @@ async function main() {
     ];
 
     for (const p of products) {
-        await prisma.product.create({
-            data: {
+        const categoryId = categoryMap.get(p.category)
+        if (!categoryId) throw new Error(`Category not found: ${p.category}`)
+        await prisma.product.upsert({
+            where: { id: p.id },
+            create: {
                 id: p.id,
                 name: p.name,
                 description: p.description,
                 price: p.price,
                 image: p.image,
-                categoryId: categoryMap.get(p.category)
+                categoryId
+            },
+            update: {
+                name: p.name,
+                description: p.description,
+                price: p.price,
+                image: p.image,
+                categoryId
             }
         })
     }
 
-    console.log(`Created ${products.length} products with fixed IDs.`)
+    console.log(`Upserted ${products.length} products with fixed IDs.`)
 
     console.log('Seeding finished.')
 }
