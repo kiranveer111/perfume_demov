@@ -44,12 +44,12 @@ export default function LoginPage() {
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-900" data-testid="login-title">
+                    <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100" data-testid="login-title">
                         Sign in to your account
                     </h2>
-                    <p className="mt-2 text-sm text-slate-600">
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                         Or{" "}
-                        <Link href="/register" className="font-medium text-blue-600 hover:text-blue-500" data-testid="register-link">
+                        <Link href="/register" className="font-medium text-blue-600 dark:text-amber-400 hover:text-blue-500 dark:hover:text-amber-300" data-testid="register-link">
                             create a new account
                         </Link>
                     </p>
@@ -91,7 +91,7 @@ export default function LoginPage() {
                     </div>
 
                     {error && (
-                        <div className="text-sm text-red-600 bg-red-50 p-2 rounded" data-testid="error-message">
+                        <div className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 p-2 rounded" data-testid="error-message">
                             {error}
                         </div>
                     )}
@@ -99,6 +99,7 @@ export default function LoginPage() {
                     <div>
                         <Button
                             type="submit"
+                            variant="luxury"
                             className="w-full"
                             disabled={loading}
                             data-testid="login-submit"
@@ -107,7 +108,7 @@ export default function LoginPage() {
                         </Button>
                     </div>
 
-                    <div className="text-center text-xs text-slate-500 mt-4">
+                    <div className="text-center text-xs text-slate-500 dark:text-slate-400 mt-4">
                         <p>Hint: user@example.com / password</p>
                     </div>
                 </form>

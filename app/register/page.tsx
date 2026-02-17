@@ -74,12 +74,12 @@ export default function RegisterPage() {
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-900" data-testid="register-title">
+                    <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100" data-testid="register-title">
                         Create an account
                     </h2>
-                    <p className="mt-2 text-sm text-slate-600">
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                         Already have an account?{" "}
-                        <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500" data-testid="login-link">
+                        <Link href="/login" className="font-medium text-blue-600 dark:text-amber-400 hover:text-blue-500 dark:hover:text-amber-300" data-testid="login-link">
                             Sign in
                         </Link>
                     </p>
@@ -129,7 +129,7 @@ export default function RegisterPage() {
                     </div>
 
                     {error && (
-                        <div className="rounded-md bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700" data-testid="register-error">
+                        <div className="rounded-md bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 px-3 py-2 text-sm text-red-700 dark:text-red-400" data-testid="register-error">
                             {error}
                         </div>
                     )}
@@ -164,6 +164,7 @@ export default function RegisterPage() {
                     <div>
                         <Button
                             type="submit"
+                            variant="luxury"
                             className="w-full"
                             disabled={loading}
                             data-testid="register-submit"

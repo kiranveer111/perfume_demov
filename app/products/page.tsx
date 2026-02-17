@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 
 // Define searchParams type for Next.js 15+ (async)
 interface ProductsPageProps {
-    searchParams: Promise<{ category?: string; sort?: string }>;
+    searchParams: Promise<{ category?: string; sort?: string; q?: string }>;
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-    const { category: selectedCategory } = await searchParams;
+    const { category: selectedCategory, q: searchQuery } = await searchParams;
 
     // Filter products
     // Map friendly slug to actual category string in data
@@ -21,21 +21,36 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     else if (selectedCategory === 'gifts') filterCategory = "Gift Sets";
     else if (selectedCategory === 'oud') filterCategory = "Oud Collection";
 
-    const filteredProducts = selectedCategory
+    let filteredProducts = selectedCategory
         ? products.filter(p => p.category === filterCategory || p.category.toLowerCase().includes(selectedCategory.toLowerCase()))
         : products;
+
+    // Text search: filter by name, brand, category, or description
+    if (searchQuery?.trim()) {
+        const q = searchQuery.trim().toLowerCase();
+        filteredProducts = filteredProducts.filter(
+            p =>
+                p.name.toLowerCase().includes(q) ||
+                p.brand.toLowerCase().includes(q) ||
+                p.category.toLowerCase().includes(q) ||
+                p.description.toLowerCase().includes(q) ||
+                (p.tags && p.tags.some(t => t.toLowerCase().includes(q)))
+        );
+    }
 
     return (
         <div className="container mx-auto px-4 py-12">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                 <div>
-                    <h1 className="text-4xl font-serif font-medium mb-4 text-primary">
-                        {selectedCategory
-                            ? categories.find(c => c.slug === selectedCategory)?.name || "Collection"
-                            : "All Perfumes"}
+                    <h1 className="text-4xl font-serif font-medium mb-4 text-primary dark:text-slate-100">
+                        {searchQuery?.trim()
+                            ? `Search: "${searchQuery}"`
+                            : selectedCategory
+                                ? categories.find(c => c.slug === selectedCategory)?.name || "Collection"
+                                : "All Perfumes"}
                     </h1>
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 dark:text-gray-400">
                         Showing {filteredProducts.length} results
                     </p>
                 </div>
@@ -72,9 +87,11 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                     ))}
                 </div>
             ) : (
-                <div className="text-center py-20 bg-gray-50 rounded-lg">
-                    <p className="text-xl text-gray-500">No perfumes found in this collection.</p>
-                    <Link href="/products" className="mt-4 inline-block text-primary underline">View all perfumes</Link>
+                <div className="text-center py-20 bg-gray-50 dark:bg-slate-800 rounded-lg border border-gray-100 dark:border-slate-700">
+                    <p className="text-xl text-gray-500 dark:text-gray-400">
+                        {searchQuery?.trim() ? `No perfumes found for "${searchQuery}".` : "No perfumes found in this collection."}
+                    </p>
+                    <Link href="/products" className="mt-4 inline-block text-primary dark:text-amber-400 underline hover:no-underline">View all perfumes</Link>
                 </div>
             )}
         </div>
