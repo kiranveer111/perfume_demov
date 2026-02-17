@@ -15,9 +15,9 @@ export function ProductCard({ product }: ProductCardProps) {
     const { addToCart } = useCart();
 
     return (
-        <div className="group relative bg-white rounded-2xl overflow-hidden luxury-shadow transition-all duration-300 hover:shadow-xl">
+        <div className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden luxury-shadow transition-all duration-300 hover:shadow-xl dark:border dark:border-slate-700">
             {/* Image Container */}
-            <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
+            <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 dark:bg-slate-700">
                 <Image
                     src={product.image}
                     alt={product.name}
@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
                 {/* Overlay Actions */}
                 <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white text-primary transition-colors mb-2 block">
+                    <button className="p-2 bg-white/80 dark:bg-slate-800/90 backdrop-blur-sm rounded-full hover:bg-white dark:hover:bg-slate-700 text-primary dark:text-slate-200 transition-colors mb-2 block">
                         <Heart size={20} />
                     </button>
                 </div>
@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
                             e.preventDefault();
                             addToCart(product);
                         }}
-                        className="w-full bg-white/90 backdrop-blur text-primary hover:bg-primary hover:text-white transition-colors"
+                        className="w-full bg-white/90 dark:bg-slate-800/90 backdrop-blur text-primary dark:text-slate-200 hover:bg-primary hover:text-white transition-colors"
                     >
                         Add to Cart
                     </Button>
@@ -50,24 +50,24 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Content */}
             <div className="p-5">
                 <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">{product.brand}</span>
+                    <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-widest">{product.brand}</span>
                     <div className="flex items-center gap-1">
                         <Star size={14} className="fill-secondary text-secondary" />
-                        <span className="text-xs font-semibold">{product.rating}</span>
+                        <span className="text-xs font-semibold text-slate-900 dark:text-slate-200">{product.rating}</span>
                     </div>
                 </div>
 
                 <Link href={`/products/${product.id}`} className="block group-hover:text-gold transition-colors">
-                    <h3 className="text-lg font-serif font-medium text-primary mb-1">{product.name}</h3>
+                    <h3 className="text-lg font-serif font-medium text-primary dark:text-slate-100 mb-1">{product.name}</h3>
                 </Link>
 
-                <p className="text-sm text-gray-500 mb-3 line-clamp-1">{product.category}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 line-clamp-1">{product.category}</p>
 
                 <div className="flex items-center justify-between mt-auto">
-                    <span className="text-lg font-semibold text-primary">₹{product.price.toFixed(2)}</span>
+                    <span className="text-lg font-semibold text-primary dark:text-slate-100">₹{product.price.toFixed(2)}</span>
                     <button
                         onClick={() => addToCart(product)}
-                        className="md:hidden p-2 rounded-full bg-gray-100 text-primary"
+                        className="md:hidden p-2 rounded-full bg-gray-100 dark:bg-slate-700 text-primary dark:text-slate-200"
                     >
                         <ShoppingBag size={18} />
                     </button>

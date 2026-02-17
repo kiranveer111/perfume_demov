@@ -23,8 +23,8 @@ export function Navbar() {
 
     return (
         <header
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-                ? "bg-white/80 backdrop-blur-md shadow-sm py-4"
+            className={`fixed top-0 w-full z-50 transition-all duration-300 text-slate-900 dark:text-slate-100 ${isScrolled
+                ? "bg-white/80 dark:bg-slate-900/90 backdrop-blur-md shadow-sm py-4"
                 : "bg-transparent py-6"
                 }`}
         >
@@ -87,31 +87,31 @@ export function Navbar() {
 
             {/* Mobile Drawer */}
             {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 w-full bg-white shadow-lg py-6 px-4 md:hidden flex flex-col space-y-4 animate-in slide-in-from-top-4">
+                <div className="absolute top-full left-0 w-full bg-white dark:bg-slate-900 shadow-lg dark:shadow-slate-950/50 py-6 px-4 md:hidden flex flex-col space-y-4 animate-in slide-in-from-top-4 border-b dark:border-slate-800">
                     <Link
                         href="/products"
-                        className="text-lg font-medium border-b pb-2"
+                        className="text-lg font-medium border-b border-gray-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-slate-100"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         Shop Perfumes
                     </Link>
                     <Link
                         href="/categories"
-                        className="text-lg font-medium border-b pb-2"
+                        className="text-lg font-medium border-b border-gray-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-slate-100"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         Collections
                     </Link>
                     <Link
                         href="/about"
-                        className="text-lg font-medium border-b pb-2"
+                        className="text-lg font-medium border-b border-gray-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-slate-100"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         Our Story
                     </Link>
                     <Link
                         href="/account"
-                        className="text-lg font-medium border-b pb-2"
+                        className="text-lg font-medium border-b border-gray-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-slate-100"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         My Account
@@ -119,7 +119,7 @@ export function Navbar() {
                     {session?.user && (
                         <Link
                             href="/account"
-                            className="text-lg font-medium border-b pb-2 flex items-center gap-2"
+                            className="text-lg font-medium border-b border-gray-200 dark:border-slate-700 pb-2 flex items-center gap-2 text-slate-900 dark:text-slate-100"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             <Package size={18} /> My Orders

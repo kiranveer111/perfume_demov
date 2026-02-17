@@ -6,11 +6,11 @@ export function BestSellers() {
     const bestSellers = products.filter(p => p.tags?.includes("Best Seller")).slice(0, 4);
 
     return (
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gray-50 dark:bg-slate-900">
             <div className="container mx-auto px-4 md:px-8">
                 <div className="text-center mb-12">
-                    <span className="text-sm uppercase tracking-widest text-gray-500 mb-2 block">Customer Favorites</span>
-                    <h2 className="text-3xl md:text-4xl font-serif">Best Sellers</h2>
+                    <span className="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2 block">Customer Favorites</span>
+                    <h2 className="text-3xl md:text-4xl font-serif text-slate-900 dark:text-slate-100">Best Sellers</h2>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

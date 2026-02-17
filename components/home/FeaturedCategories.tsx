@@ -4,9 +4,9 @@ import { categories } from "@/lib/data";
 
 export function FeaturedCategories() {
     return (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
             <div className="container mx-auto px-4 md:px-8">
-                <h2 className="text-3xl md:text-4xl font-serif text-center mb-12 animate-in fade-in slide-in-from-bottom-4">
+                <h2 className="text-3xl md:text-4xl font-serif text-center mb-12 text-slate-900 dark:text-slate-100 animate-in fade-in slide-in-from-bottom-4">
                     Curated Collections
                 </h2>
 

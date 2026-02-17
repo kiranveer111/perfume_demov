@@ -36,28 +36,28 @@ export default async function AccountPage() {
         <div className="container mx-auto px-4 py-12">
             <div className="max-w-4xl mx-auto">
                 <div className="flex justify-between items-center mb-10">
-                    <h1 className="text-3xl md:text-4xl font-serif">My Account</h1>
+                    <h1 className="text-3xl md:text-4xl font-serif text-slate-900 dark:text-slate-100">My Account</h1>
                     <SignOutButton />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Profile Card */}
                     <div className="md:col-span-1">
-                        <div className="bg-white p-6 rounded-2xl luxury-shadow">
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl luxury-shadow dark:border dark:border-slate-700">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="bg-gray-100 p-3 rounded-full">
-                                    <UserIcon size={24} className="text-primary" />
+                                <div className="bg-gray-100 dark:bg-slate-700 p-3 rounded-full">
+                                    <UserIcon size={24} className="text-primary dark:text-slate-200" />
                                 </div>
                                 <div>
-                                    <p className="font-medium text-lg">{user.name || "User"}</p>
-                                    <p className="text-sm text-gray-500">{user.email}</p>
+                                    <p className="font-medium text-lg text-slate-900 dark:text-slate-100">{user.name || "User"}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <div className="text-sm">
-                                    <span className="text-gray-500 block mb-1">Member since</span>
-                                    <span className="font-medium">{new Date(user.createdAt).toLocaleDateString()}</span>
+                                    <span className="text-gray-500 dark:text-gray-400 block mb-1">Member since</span>
+                                    <span className="font-medium text-slate-900 dark:text-slate-100">{new Date(user.createdAt).toLocaleDateString()}</span>
                                 </div>
                             </div>
 
@@ -69,14 +69,14 @@ export default async function AccountPage() {
 
                     {/* Orders */}
                     <div className="md:col-span-2">
-                        <div className="bg-white p-6 rounded-2xl luxury-shadow min-h-[400px]">
-                            <h2 className="text-xl font-serif mb-2 flex items-center gap-2">
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl luxury-shadow dark:border dark:border-slate-700 min-h-[400px]">
+                            <h2 className="text-xl font-serif mb-2 flex items-center gap-2 text-slate-900 dark:text-slate-100">
                                 <Package size={20} /> Order History
                             </h2>
-                            <p className="text-sm text-gray-500 mb-6">Manage and track your orders</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Manage and track your orders</p>
 
                             {user.orders.length === 0 ? (
-                                <div className="text-center py-12 text-gray-500">
+                                <div className="text-center py-12 text-gray-500 dark:text-gray-400">
                                     <p>You haven't placed any orders yet.</p>
                                     <Button variant="link" asChild className="mt-2 text-primary">
                                         <Link href="/products">Start Shopping</Link>
@@ -85,14 +85,14 @@ export default async function AccountPage() {
                             ) : (
                                 <div className="space-y-6">
                                     {user.orders.map(order => (
-                                        <div key={order.id} className="border border-gray-100 rounded-xl p-4 hover:border-gray-200 transition-colors">
-                                            <div className="flex justify-between items-start mb-4 pb-4 border-b border-gray-50">
+                                        <div key={order.id} className="border border-gray-100 dark:border-slate-700 rounded-xl p-4 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
+                                            <div className="flex justify-between items-start mb-4 pb-4 border-b border-gray-50 dark:border-slate-700">
                                                 <div>
-                                                    <p className="font-medium">Order #{order.id.slice(-6).toUpperCase()}</p>
-                                                    <p className="text-xs text-gray-500">{new Date(order.createdAt).toLocaleDateString()}</p>
+                                                    <p className="font-medium text-slate-900 dark:text-slate-100">Order #{order.id.slice(-6).toUpperCase()}</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400">{new Date(order.createdAt).toLocaleDateString()}</p>
                                                 </div>
                                                 <div className="text-right">
-                                                    <p className="font-medium">₹{Number(order.total).toFixed(2)}</p>
+                                                    <p className="font-medium text-slate-900 dark:text-slate-100">₹{Number(order.total).toFixed(2)}</p>
                                                     <span className={`inline-block px-2 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium ${order.status === 'delivered' ? 'bg-green-100 text-green-700' :
                                                         order.status === 'shipped' ? 'bg-blue-100 text-blue-700' :
                                                             'bg-yellow-100 text-yellow-700'
@@ -103,8 +103,8 @@ export default async function AccountPage() {
                                             </div>
                                             <div className="space-y-2">
                                                 {order.items.map(item => (
-                                                    <div key={item.id} className="flex justify-between text-sm">
-                                                        <span className="text-gray-600 flex-1 truncate pr-4">
+                                                    <div key={item.id} className="flex justify-between text-sm text-slate-900 dark:text-slate-200">
+                                                        <span className="text-gray-600 dark:text-gray-300 flex-1 truncate pr-4">
                                                             {item.quantity}x {item.product.name}
                                                         </span>
                                                         <span>₹{Number(item.price).toFixed(2)}</span>

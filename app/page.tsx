@@ -7,11 +7,11 @@ import { Testimonials } from "@/components/home/Testimonials";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex flex-col items-center text-center py-16 bg-gradient-to-r from-pink-50 to-purple-50">
-        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl" data-testid="hero-title">
+      <div className="flex flex-col items-center text-center py-16 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-slate-800 dark:to-slate-900">
+        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 sm:text-6xl" data-testid="hero-title">
           ThePerfumeShop
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-slate-600" data-testid="hero-subtitle">
+        <p className="mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300" data-testid="hero-subtitle">
           A premium e-commerce site for automation testing.
           Experiment with selectors, user flows, and assertions in a stable environment.
         </p>
