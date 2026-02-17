@@ -12,9 +12,16 @@ export default function CheckoutSuccessPage() {
             <p className="text-xl text-slate-600 mb-8" data-testid="success-message">
                 Thank you for your purchase. Your order has been confirmed.
             </p>
-            <Link href="/products">
-                <Button size="lg" data-testid="continue-shopping">Continue Shopping</Button>
-            </Link>
+            <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/account">
+                    <Button variant="outline" size="lg" data-testid="view-orders">
+                        View your orders
+                    </Button>
+                </Link>
+                <Link href="/products">
+                    <Button size="lg" data-testid="continue-shopping">Continue Shopping</Button>
+                </Link>
+            </div>
         </div>
     )
 }

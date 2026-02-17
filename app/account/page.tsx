@@ -70,9 +70,10 @@ export default async function AccountPage() {
                     {/* Orders */}
                     <div className="md:col-span-2">
                         <div className="bg-white p-6 rounded-2xl luxury-shadow min-h-[400px]">
-                            <h2 className="text-xl font-serif mb-6 flex items-center gap-2">
+                            <h2 className="text-xl font-serif mb-2 flex items-center gap-2">
                                 <Package size={20} /> Order History
                             </h2>
+                            <p className="text-sm text-gray-500 mb-6">Manage and track your orders</p>
 
                             {user.orders.length === 0 ? (
                                 <div className="text-center py-12 text-gray-500">

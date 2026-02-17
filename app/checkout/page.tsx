@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 import { useCart } from "@/context/CartContext"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,6 +10,7 @@ import Link from "next/link"
 
 export default function CheckoutPage() {
     const router = useRouter()
+    const { data: session, status } = useSession()
     const { items: cart, cartTotal: total, clearCart } = useCart()
     const [formData, setFormData] = useState({
         firstName: "",
@@ -21,6 +23,20 @@ export default function CheckoutPage() {
         upiId: "",
     })
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login?callbackUrl=/checkout")
+        }
+    }, [status, router])
+
+    if (status === "loading" || !session) {
+        return (
+            <div className="container mx-auto px-4 py-16 text-center">
+                <p className="text-slate-600">Loading...</p>
+            </div>
+        )
+    }
 
     if (cart.length === 0) {
         return (
@@ -44,6 +60,17 @@ export default function CheckoutPage() {
         try {
             const res = await fetch('/api/checkout', {
                 method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    items: cart,
+                    total,
+                    firstName: formData.firstName.trim(),
+                    lastName: formData.lastName.trim(),
+                    address: formData.address.trim(),
+                    city: formData.city.trim(),
+                    zipCode: formData.zipCode.trim(),
+                    paymentMethod: formData.paymentMethod,
+                }),
             })
 
             if (res.ok) {
@@ -52,9 +79,7 @@ export default function CheckoutPage() {
             } else {
                 const text = await res.text()
                 if (res.status === 401) {
-                    // Redirect to login or show error
-                    alert("Please log in to checkout")
-                    router.push("/login")
+                    router.push("/login?callbackUrl=/checkout")
                 } else {
                     alert(text || "Checkout failed")
                 }
@@ -178,12 +203,11 @@ export default function CheckoutPage() {
 
                             {formData.paymentMethod === "card" && (
                                 <div className="mt-4">
-                                    <label className="block text-sm font-medium text-slate-700 mb-1">Card Number</label>
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">Card Number (dummy)</label>
                                     <Input
                                         name="cardNumber"
                                         value={formData.cardNumber}
                                         onChange={handleChange}
-                                        required
                                         placeholder="0000 0000 0000 0000"
                                         data-testid="card-number"
                                     />
@@ -192,12 +216,11 @@ export default function CheckoutPage() {
 
                             {formData.paymentMethod === "upi" && (
                                 <div className="mt-4">
-                                    <label className="block text-sm font-medium text-slate-700 mb-1">UPI ID</label>
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">UPI ID (dummy)</label>
                                     <Input
                                         name="upiId"
                                         value={formData.upiId || ""}
                                         onChange={handleChange}
-                                        required
                                         placeholder="user@bank"
                                         data-testid="upi-id"
                                     />

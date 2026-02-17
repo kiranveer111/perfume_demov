@@ -6,11 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Trash2, Minus, Plus, ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function CartPage() {
     const { items, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
+    const { data: session } = useSession();
 
     if (items.length === 0) {
         return (
@@ -23,43 +22,6 @@ export default function CartPage() {
             </div>
         );
     }
-
-    const [loading, setLoading] = useState(false);
-    const { data: session } = useSession();
-    const router = useRouter();
-
-    const handleCheckout = async () => {
-        if (!session) {
-            router.push("/login?callbackUrl=/cart");
-            return;
-        }
-
-        setLoading(true);
-        try {
-            const res = await fetch("/api/checkout", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    items: items,
-                    total: cartTotal
-                })
-            });
-
-            if (!res.ok) {
-                const msg = await res.text();
-                throw new Error(msg);
-            }
-
-            // Success
-            clearCart();
-            router.push("/account");
-        } catch (error) {
-            console.error(error);
-            alert("Checkout failed. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <div className="container mx-auto px-4 py-12 md:py-20">
@@ -150,10 +112,11 @@ export default function CartPage() {
                         <Button
                             className="w-full py-6 text-lg rounded-full"
                             variant="luxury"
-                            onClick={handleCheckout}
-                            disabled={loading}
+                            asChild
                         >
-                            {loading ? "Processing..." : "Checkout"} <ArrowRight className="ml-2" size={18} />
+                            <Link href={session ? "/checkout" : "/login?callbackUrl=/cart"}>
+                                Checkout <ArrowRight className="ml-2" size={18} />
+                            </Link>
                         </Button>
 
                         <p className="text-xs text-gray-400 text-center mt-4">

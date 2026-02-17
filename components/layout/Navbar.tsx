@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { User, ShoppingBag, Menu, X, Search } from "lucide-react";
+import { User, ShoppingBag, Menu, X, Search, Package } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
@@ -46,6 +46,11 @@ export function Navbar() {
                         <Link href="/about" className="text-sm font-medium hover:text-gold transition-colors">
                             Our Story
                         </Link>
+                        {session?.user && (
+                            <Link href="/account" className="text-sm font-medium hover:text-gold transition-colors flex items-center gap-1.5">
+                                <Package size={16} /> My Orders
+                            </Link>
+                        )}
                     </div>
 
                     {/* Actions */}
@@ -111,6 +116,15 @@ export function Navbar() {
                     >
                         My Account
                     </Link>
+                    {session?.user && (
+                        <Link
+                            href="/account"
+                            className="text-lg font-medium border-b pb-2 flex items-center gap-2"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            <Package size={18} /> My Orders
+                        </Link>
+                    )}
                 </div>
             )}
         </header>
