@@ -75,7 +75,6 @@ export const authOptions: AuthOptions = {
         },
     },
     debug: process.env.NODE_ENV === 'development',
-    trustHost: true, // Required for Vercel deployment
 }
 
 const handler = NextAuth(authOptions)
