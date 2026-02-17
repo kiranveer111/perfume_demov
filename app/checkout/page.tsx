@@ -33,7 +33,7 @@ export default function CheckoutPage() {
     if (status === "loading" || !session) {
         return (
             <div className="container mx-auto px-4 py-16 text-center">
-                <p className="text-slate-600">Loading...</p>
+                <p className="text-slate-600 dark:text-slate-300">Loading...</p>
             </div>
         )
     }
@@ -41,7 +41,7 @@ export default function CheckoutPage() {
     if (cart.length === 0) {
         return (
             <div className="container mx-auto px-4 py-16 text-center">
-                <h1 className="text-2xl font-bold mb-4">Your Cart is Empty</h1>
+                <h1 className="text-2xl font-bold mb-4 text-slate-900 dark:text-slate-100">Your Cart is Empty</h1>
                 <Link href="/products">
                     <Button>Return to Shop</Button>
                 </Link>
@@ -94,15 +94,15 @@ export default function CheckoutPage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8" data-testid="checkout-title">Checkout</h1>
+            <h1 className="text-3xl font-bold mb-8 text-slate-900 dark:text-slate-100" data-testid="checkout-title">Checkout</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
-                    <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
+                    <h2 className="text-xl font-semibold mb-6 text-slate-900 dark:text-slate-100">Shipping Information</h2>
                     <form id="checkout-form" onSubmit={handleSubmit} className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">First Name</label>
                                 <Input
                                     name="firstName"
                                     value={formData.firstName}
@@ -112,7 +112,7 @@ export default function CheckoutPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Last Name</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Last Name</label>
                                 <Input
                                     name="lastName"
                                     value={formData.lastName}
@@ -124,7 +124,7 @@ export default function CheckoutPage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Address</label>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Address</label>
                             <Input
                                 name="address"
                                 value={formData.address}
@@ -136,7 +136,7 @@ export default function CheckoutPage() {
 
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">City</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">City</label>
                                 <Input
                                     name="city"
                                     value={formData.city}
@@ -146,7 +146,7 @@ export default function CheckoutPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Zip Code</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Zip Code</label>
                                 <Input
                                     name="zipCode"
                                     value={formData.zipCode}
@@ -157,8 +157,8 @@ export default function CheckoutPage() {
                             </div>
                         </div>
 
-                        <div className="pt-6 border-t mt-6">
-                            <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
+                        <div className="pt-6 border-t border-slate-200 dark:border-slate-700 mt-6">
+                            <h2 className="text-xl font-semibold mb-4 text-slate-900 dark:text-slate-100">Payment Method</h2>
                             <div className="space-y-4">
                                 <div className="flex items-center space-x-2">
                                     <input
@@ -168,10 +168,10 @@ export default function CheckoutPage() {
                                         value="card"
                                         checked={formData.paymentMethod === "card"}
                                         onChange={handleChange}
-                                        className="h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        className="h-4 w-4 border-slate-300 dark:border-slate-500 text-amber-500 focus:ring-amber-500 dark:bg-slate-800 dark:checked:bg-amber-500"
                                         data-testid="payment-card"
                                     />
-                                    <label htmlFor="card" className="text-sm font-medium text-slate-700">Credit/Debit Card</label>
+                                    <label htmlFor="card" className="text-sm font-medium text-slate-700 dark:text-slate-300">Credit/Debit Card</label>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <input
@@ -181,10 +181,10 @@ export default function CheckoutPage() {
                                         value="cod"
                                         checked={formData.paymentMethod === "cod"}
                                         onChange={handleChange}
-                                        className="h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        className="h-4 w-4 border-slate-300 dark:border-slate-500 text-amber-500 focus:ring-amber-500 dark:bg-slate-800 dark:checked:bg-amber-500"
                                         data-testid="payment-cod"
                                     />
-                                    <label htmlFor="cod" className="text-sm font-medium text-slate-700">Cash on Delivery (COD)</label>
+                                    <label htmlFor="cod" className="text-sm font-medium text-slate-700 dark:text-slate-300">Cash on Delivery (COD)</label>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <input
@@ -194,16 +194,16 @@ export default function CheckoutPage() {
                                         value="upi"
                                         checked={formData.paymentMethod === "upi"}
                                         onChange={handleChange}
-                                        className="h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        className="h-4 w-4 border-slate-300 dark:border-slate-500 text-amber-500 focus:ring-amber-500 dark:bg-slate-800 dark:checked:bg-amber-500"
                                         data-testid="payment-upi"
                                     />
-                                    <label htmlFor="upi" className="text-sm font-medium text-slate-700">UPI</label>
+                                    <label htmlFor="upi" className="text-sm font-medium text-slate-700 dark:text-slate-300">UPI</label>
                                 </div>
                             </div>
 
                             {formData.paymentMethod === "card" && (
                                 <div className="mt-4">
-                                    <label className="block text-sm font-medium text-slate-700 mb-1">Card Number (dummy)</label>
+                                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Card Number (dummy)</label>
                                     <Input
                                         name="cardNumber"
                                         value={formData.cardNumber}
@@ -216,7 +216,7 @@ export default function CheckoutPage() {
 
                             {formData.paymentMethod === "upi" && (
                                 <div className="mt-4">
-                                    <label className="block text-sm font-medium text-slate-700 mb-1">UPI ID (dummy)</label>
+                                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">UPI ID (dummy)</label>
                                     <Input
                                         name="upiId"
                                         value={formData.upiId || ""}
@@ -231,17 +231,17 @@ export default function CheckoutPage() {
                 </div>
 
                 <div>
-                    <div className="bg-slate-50 p-6 rounded-lg border">
-                        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+                    <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
+                        <h2 className="text-xl font-semibold mb-4 text-slate-900 dark:text-slate-100">Order Summary</h2>
                         <div className="space-y-4 mb-4">
                             {cart.map((item) => (
-                                <div key={item.id} className="flex justify-between text-sm">
+                                <div key={item.id} className="flex justify-between text-sm text-slate-700 dark:text-slate-200">
                                     <span>{item.name} x {item.quantity}</span>
                                     <span>₹{(item.price * item.quantity).toFixed(2)}</span>
                                 </div>
                             ))}
                         </div>
-                        <div className="border-t pt-4 flex justify-between font-bold text-lg">
+                        <div className="border-t border-slate-200 dark:border-slate-600 pt-4 flex justify-between font-bold text-lg text-slate-900 dark:text-slate-100">
                             <span>Total</span>
                             <span data-testid="total-price">₹{total.toFixed(2)}</span>
                         </div>
@@ -249,6 +249,7 @@ export default function CheckoutPage() {
                         <Button
                             form="checkout-form"
                             type="submit"
+                            variant="luxury"
                             className="w-full mt-6"
                             size="lg"
                             disabled={loading}

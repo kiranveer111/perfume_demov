@@ -9,19 +9,19 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 default:
-                    "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+                    "bg-primary text-primary-foreground shadow hover:bg-primary/90 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600",
                 destructive:
                     "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
                 outline:
-                    "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+                    "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700",
                 secondary:
-                    "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-                ghost: "hover:bg-accent hover:text-accent-foreground",
-                link: "text-primary underline-offset-4 hover:underline",
-                // Luxury variants
-                luxury: "bg-primary text-white hover:bg-primary/90 shadow-md uppercase tracking-wider",
-                luxuryOutline: "border border-primary text-primary hover:bg-primary hover:text-white uppercase tracking-wider",
-                gold: "bg-secondary text-white hover:bg-secondary/90 shadow-md uppercase tracking-wider",
+                    "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 dark:bg-amber-500/90 dark:text-slate-900 dark:hover:bg-amber-500",
+                ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-slate-800 dark:text-slate-100",
+                link: "text-primary underline-offset-4 hover:underline dark:text-slate-200",
+                // Luxury variants - high contrast in both modes
+                luxury: "bg-slate-900 dark:bg-slate-700 text-white hover:bg-slate-800 dark:hover:bg-slate-600 shadow-md uppercase tracking-wider font-semibold",
+                luxuryOutline: "border-2 border-slate-900 dark:border-slate-300 text-slate-900 dark:text-slate-100 hover:bg-slate-900 dark:hover:bg-slate-300 hover:text-white dark:hover:text-slate-900 uppercase tracking-wider",
+                gold: "bg-secondary text-slate-900 hover:bg-amber-500 shadow-md uppercase tracking-wider font-semibold dark:bg-amber-500 dark:text-slate-900 dark:hover:bg-amber-400",
             },
             size: {
                 default: "h-9 px-4 py-2",
