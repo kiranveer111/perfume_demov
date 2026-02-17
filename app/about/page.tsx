@@ -7,7 +7,7 @@ export default function AboutPage() {
                     Crafting Memories through <span className="italic">Scent</span>
                 </h1>
                 <p className="text-xl text-gray-500 font-light leading-relaxed mb-12">
-                    L'Essence was born from a passion for the evocative power of fragrance. We believe that a perfume is not just an accessory, but a personal signature that lingers in memory long after you've left the room.
+                    ThePerfumeShop was born from a passion for the evocative power of fragrance. We believe that a perfume is not just an accessory, but a personal signature that lingers in memory long after you've left the room.
                 </p>
                 <div className="h-px w-24 bg-gold mx-auto mb-12" />
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">

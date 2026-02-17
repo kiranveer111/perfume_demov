@@ -79,14 +79,19 @@ model Category {
 }
 
 model Order {
-  id        String      @id @default(cuid())
-  userId    String
-  user      User        @relation(fields: [userId], references: [id])
-  total     Decimal     @db.Decimal(10, 2)
-  status    String      @default("pending") // pending, paid, shipped, delivered, cancelled
-  items     OrderItem[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id])
+  total           Decimal     @db.Decimal(10, 2)
+  status          String      @default("pending") // pending, paid, shipped, delivered, cancelled
+  shippingAddress String?
+  city            String?
+  zipCode         String?
+  country         String?
+  paymentMethod   String?
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }
 
 model OrderItem {

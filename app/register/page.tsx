@@ -16,6 +16,7 @@ export default function RegisterPage() {
         confirmPassword: "",
     })
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -26,10 +27,11 @@ export default function RegisterPage() {
         setLoading(true)
 
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match")
+            setError("Passwords do not match")
             setLoading(false)
             return
         }
+        setError("")
 
         try {
             const res = await fetch('/api/register', {
@@ -37,18 +39,32 @@ export default function RegisterPage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    firstName: formData.firstName.trim(),
+                    lastName: formData.lastName.trim(),
+                    email: formData.email.trim().toLowerCase(),
+                    password: formData.password
+                })
             })
+
+            const text = await res.text()
+            let data: { error?: string; message?: string } = {}
+            try {
+                data = text ? JSON.parse(text) : {}
+            } catch {
+                data = { error: text || "Registration failed" }
+            }
+            const errorMessage = typeof data?.error === "string" ? data.error : (data?.message || "Registration failed")
 
             if (res.ok) {
                 router.push("/login")
+                router.refresh()
             } else {
-                const errorText = await res.text()
-                alert(errorText)
+                setError(errorMessage)
             }
-        } catch (error) {
-            console.error("Registration failed", error)
-            alert("Something went wrong")
+        } catch (err) {
+            console.error("Registration failed", err)
+            setError("Network error. Please check your connection and try again.")
         } finally {
             setLoading(false)
         }
@@ -111,6 +127,13 @@ export default function RegisterPage() {
                             data-testid="email-input"
                         />
                     </div>
+
+                    {error && (
+                        <div className="rounded-md bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700" data-testid="register-error">
+                            {error}
+                        </div>
+                    )}
+
                     <div>
                         <label htmlFor="password" className="sr-only">Password</label>
                         <Input

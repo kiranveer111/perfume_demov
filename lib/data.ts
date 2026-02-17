@@ -14,7 +14,7 @@ export const products: Product[] = [
     {
         id: "1",
         name: "Midnight Oud",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Oud Collection",
         price: 129.99,
         image: "https://images.unsplash.com/photo-1585218334450-afcf929da36e?q=80&w=1000&auto=format&fit=crop",
@@ -25,7 +25,7 @@ export const products: Product[] = [
     {
         id: "2",
         name: "Ethereal Bloom",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Women's Perfumes",
         price: 89.50,
         image: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000&auto=format&fit=crop",
@@ -36,7 +36,7 @@ export const products: Product[] = [
     {
         id: "3",
         name: "Noir Intense",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Men's Perfumes",
         price: 95.00,
         image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=1000&auto=format&fit=crop",
@@ -47,7 +47,7 @@ export const products: Product[] = [
     {
         id: "4",
         name: "Golden Amber",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Luxury Collection",
         price: 185.00,
         image: "https://images.unsplash.com/photo-1594125311687-3b1b3eafa9f4?q=80&w=1000&auto=format&fit=crop",
@@ -58,7 +58,7 @@ export const products: Product[] = [
     {
         id: "5",
         name: "Oceanic Drift",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Men's Perfumes",
         price: 78.00,
         image: "https://images.unsplash.com/photo-1615160460366-2c9a41771b51?q=80&w=1000&auto=format&fit=crop",
@@ -69,7 +69,7 @@ export const products: Product[] = [
     {
         id: "6",
         name: "Rose Éclat",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Women's Perfumes",
         price: 110.00,
         image: "https://images.unsplash.com/photo-1582211594533-268f4f1edcb9?q=80&w=1000&auto=format&fit=crop",
@@ -80,7 +80,7 @@ export const products: Product[] = [
     {
         id: "7",
         name: "Vanilla Silk",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Unisex Perfumes",
         price: 92.00,
         image: "https://images.unsplash.com/photo-1708486855543-6010a133280f?q=80&w=1000&auto=format&fit=crop",
@@ -91,7 +91,7 @@ export const products: Product[] = [
     {
         id: "8",
         name: "Saffron Spice",
-        brand: "L'Essence",
+        brand: "ThePerfumeShop",
         category: "Luxury Collection",
         price: 210.00,
         image: "https://images.unsplash.com/photo-1610113233329-1c73b6f7fe98?q=80&w=1000&auto=format&fit=crop",

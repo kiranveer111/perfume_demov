@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
-import { X, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
+import { X, Trash2, ShoppingBag, ArrowRight, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function CartSidebar() {
-    const { isCartOpen, toggleCart, items, removeFromCart, cartTotal } = useCart();
+    const { isCartOpen, toggleCart, items, removeFromCart, updateQuantity, cartTotal } = useCart();
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
 
@@ -89,12 +89,29 @@ export default function CartSidebar() {
                                         <p className="text-sm text-gray-500">{item.brand}</p>
                                     </div>
                                     <div className="flex items-center justify-between mt-2">
-                                        <span className="text-sm text-gray-500">Qty: {item.quantity}</span>
-                                        <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                className="p-1 rounded border border-gray-200 hover:bg-gray-50 transition-colors"
+                                                aria-label="Decrease quantity"
+                                            >
+                                                <Minus size={14} />
+                                            </button>
+                                            <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
+                                            <button
+                                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                className="p-1 rounded border border-gray-200 hover:bg-gray-50 transition-colors"
+                                                aria-label="Increase quantity"
+                                            >
+                                                <Plus size={14} />
+                                            </button>
+                                        </div>
+                                        <div className="flex items-center gap-2">
                                             <span className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</span>
                                             <button
                                                 onClick={() => removeFromCart(item.id)}
                                                 className="text-gray-400 hover:text-red-500 transition-colors"
+                                                aria-label="Remove item"
                                             >
                                                 <Trash2 size={16} />
                                             </button>

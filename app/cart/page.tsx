@@ -10,27 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CartPage() {
-    const { items, removeFromCart, addToCart, clearCart, cartTotal } = useCart();
-
-    const updateQuantity = (id: string, delta: number) => {
-        const item = items.find((i) => i.id === id);
-        if (!item) return;
-
-        if (delta > 0) {
-            addToCart(item);
-        } else {
-            // Logic to decrease quantity or remove is slightly different in our simple context
-            // For now, we only have addToCart which increments. 
-            // To implement decrease, we'd need a updateQuantity function in context.
-            // But for this MVP, let's just use removeFromCart if quantity is 1? 
-            // Or we can assume addToCart adds 1.
-            // Wait, context `addToCart` adds 1.
-            // We don't have existing `decreaseQuantity` in context.
-            // I'll stick to remove for now or just not implement decrease efficiently without context update.
-            // Let's just implement remove.
-            removeFromCart(id);
-        }
-    };
+    const { items, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
 
     if (items.length === 0) {
         return (
@@ -110,13 +90,27 @@ export default function CartPage() {
                                 </div>
 
                                 <div className="flex justify-between items-center mt-4">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-sm text-gray-500">Qty: {item.quantity}</span>
-                                        {/* Simplified quantity control since context is limited */}
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                            className="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                                            aria-label="Decrease quantity"
+                                        >
+                                            <Minus size={18} />
+                                        </button>
+                                        <span className="text-sm font-medium w-8 text-center">{item.quantity}</span>
+                                        <button
+                                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                            className="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                                            aria-label="Increase quantity"
+                                        >
+                                            <Plus size={18} />
+                                        </button>
                                     </div>
                                     <button
                                         onClick={() => removeFromCart(item.id)}
                                         className="text-red-500 hover:text-red-700 transition-colors p-2"
+                                        aria-label="Remove item"
                                     >
                                         <Trash2 size={18} />
                                     </button>

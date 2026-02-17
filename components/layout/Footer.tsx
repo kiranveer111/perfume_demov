@@ -9,7 +9,7 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
                     <div className="space-y-4">
-                        <h3 className="text-2xl font-serif font-bold tracking-tighter text-secondary">L'Essence</h3>
+                        <h3 className="text-2xl font-serif font-bold tracking-tighter text-secondary">ThePerfumeShop</h3>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Curating the world's finest fragrances. An olfactory journey of luxury and elegance.
                         </p>
@@ -56,7 +56,7 @@ export function Footer() {
 
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-gray-500 text-xs text-center md:text-left">
-                        © {new Date().getFullYear()} L'Essence. All rights reserved.
+                        © {new Date().getFullYear()} ThePerfumeShop. All rights reserved.
                     </p>
                     <div className="flex space-x-6">
                         <Link href="#" className="text-gray-400 hover:text-secondary transition-colors"><Facebook size={18} /></Link>

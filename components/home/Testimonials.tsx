@@ -5,7 +5,7 @@ export function Testimonials() {
         {
             id: 1,
             name: "Sophia L.",
-            text: "L'Essence has completely transformed my fragrance collection. The Midnight Oud is simply divine.",
+            text: "ThePerfumeShop has completely transformed my fragrance collection. The Midnight Oud is simply divine.",
             rating: 5,
         },
         {

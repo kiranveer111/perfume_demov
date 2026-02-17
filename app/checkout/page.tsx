@@ -17,6 +17,8 @@ export default function CheckoutPage() {
         city: "",
         zipCode: "",
         cardNumber: "",
+        paymentMethod: "card",
+        upiId: "",
     })
     const [loading, setLoading] = useState(false)
 
@@ -131,18 +133,76 @@ export default function CheckoutPage() {
                         </div>
 
                         <div className="pt-6 border-t mt-6">
-                            <h2 className="text-xl font-semibold mb-4">Payment Details (Mock)</h2>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Card Number</label>
-                                <Input
-                                    name="cardNumber"
-                                    value={formData.cardNumber}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="0000 0000 0000 0000"
-                                    data-testid="card-number"
-                                />
+                            <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
+                            <div className="space-y-4">
+                                <div className="flex items-center space-x-2">
+                                    <input
+                                        type="radio"
+                                        id="card"
+                                        name="paymentMethod"
+                                        value="card"
+                                        checked={formData.paymentMethod === "card"}
+                                        onChange={handleChange}
+                                        className="h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        data-testid="payment-card"
+                                    />
+                                    <label htmlFor="card" className="text-sm font-medium text-slate-700">Credit/Debit Card</label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <input
+                                        type="radio"
+                                        id="cod"
+                                        name="paymentMethod"
+                                        value="cod"
+                                        checked={formData.paymentMethod === "cod"}
+                                        onChange={handleChange}
+                                        className="h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        data-testid="payment-cod"
+                                    />
+                                    <label htmlFor="cod" className="text-sm font-medium text-slate-700">Cash on Delivery (COD)</label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <input
+                                        type="radio"
+                                        id="upi"
+                                        name="paymentMethod"
+                                        value="upi"
+                                        checked={formData.paymentMethod === "upi"}
+                                        onChange={handleChange}
+                                        className="h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        data-testid="payment-upi"
+                                    />
+                                    <label htmlFor="upi" className="text-sm font-medium text-slate-700">UPI</label>
+                                </div>
                             </div>
+
+                            {formData.paymentMethod === "card" && (
+                                <div className="mt-4">
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">Card Number</label>
+                                    <Input
+                                        name="cardNumber"
+                                        value={formData.cardNumber}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="0000 0000 0000 0000"
+                                        data-testid="card-number"
+                                    />
+                                </div>
+                            )}
+
+                            {formData.paymentMethod === "upi" && (
+                                <div className="mt-4">
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">UPI ID</label>
+                                    <Input
+                                        name="upiId"
+                                        value={formData.upiId || ""}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="user@bank"
+                                        data-testid="upi-id"
+                                    />
+                                </div>
+                            )}
                         </div>
                     </form>
                 </div>

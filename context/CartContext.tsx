@@ -9,7 +9,8 @@ export type CartItem = Product & {
 
 type CartContextType = {
     items: CartItem[];
-    addToCart: (product: Product) => void;
+    addToCart: (product: Product, quantity?: number) => void;
+    updateQuantity: (productId: string, quantity: number) => void;
     removeFromCart: (productId: string) => void;
     clearCart: () => void;
     cartCount: number;
@@ -41,17 +42,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [items, isInitialized]);
 
-    const addToCart = (product: Product) => {
+    const addToCart = (product: Product, quantity: number = 1) => {
         setItems((prevItems) => {
             const existingItem = prevItems.find((item) => item.id === product.id);
             if (existingItem) {
                 return prevItems.map((item) =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
             }
-            return [...prevItems, { ...product, quantity: 1 }];
+            return [...prevItems, { ...product, quantity }];
         });
         setIsCartOpen(true);
     };
@@ -59,6 +60,18 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const removeFromCart = (productId: string) => {
         setItems((prevItems) =>
             prevItems.filter((item) => item.id !== productId)
+        );
+    };
+
+    const updateQuantity = (productId: string, quantity: number) => {
+        if (quantity <= 0) {
+            removeFromCart(productId);
+            return;
+        }
+        setItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === productId ? { ...item, quantity } : item
+            )
         );
     };
 
@@ -78,6 +91,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             value={{
                 items,
                 addToCart,
+                updateQuantity,
                 removeFromCart,
                 clearCart,
                 cartCount,

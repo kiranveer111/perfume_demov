@@ -32,7 +32,7 @@ export function Navbar() {
                 <nav className="flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="text-2xl font-serif font-bold tracking-tighter">
-                        L'Essence
+                        ThePerfumeShop
                     </Link>
 
                     {/* Desktop Links */}

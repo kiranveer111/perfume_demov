@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "L'Essence - Luxury Perfumes",
-  description: "Discover your signature scent with L'Essence. Premium perfumes for men and women.",
+  title: "ThePerfumeShop",
+  description: "Test automation sandbox for e-commerce.",
 };
 
 export default function RootLayout({

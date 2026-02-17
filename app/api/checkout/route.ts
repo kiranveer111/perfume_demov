@@ -10,7 +10,7 @@ export async function POST(req: Request) {
         return new NextResponse("Unauthorized", { status: 401 })
     }
 
-    const { items, total } = await req.json()
+    const { items, total, firstName, lastName, address, city, zipCode, paymentMethod } = await req.json()
 
     if (!items || items.length === 0) {
         return new NextResponse("No items in checkout", { status: 400 })
@@ -30,6 +30,10 @@ export async function POST(req: Request) {
                 userId: user.id,
                 total: total,
                 status: "processing",
+                shippingAddress: `${firstName} ${lastName}, ${address}`,
+                city: city,
+                zipCode: zipCode,
+                paymentMethod: paymentMethod,
                 items: {
                     create: items.map((item: any) => ({
                         productId: item.id,
